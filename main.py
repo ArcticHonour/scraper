@@ -169,9 +169,9 @@ if __name__ == "__main__":
     elif choice1 == "3":
         print("19027209 - legit")
         x = datetime.datetime.now()
-##        hook2.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
-##        hook3.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
-##        hook.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
+        hook2.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
+        hook3.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
+        hook.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
         for items in items_to_check:
             print(f"Filters set - {items}")
         find_user_with_items(items_to_check)

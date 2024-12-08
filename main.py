@@ -160,6 +160,7 @@ if __name__ == "__main__":
                       "Epic Face",
                       "Auburn Shaggy"
                       ]
+    print(f"{Fore.CYAN}Made by ArcticHonour")
     choice1 = input(f"{Style.BRIGHT}{Fore.MAGENTA}OFFLINE OR ONLINE OR INV FILTER? 1/2/3")
     if choice1 == "1":
         press2()

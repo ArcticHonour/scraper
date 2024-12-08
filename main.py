@@ -4,6 +4,9 @@ import os
 from colorama import *
 from dhooks import *
 import time
+import json
+import datetime
+import re
 
 os.system("clear")
 hook_url = "https://discord.com/api/webhooks/1307686709886062683/UQStVdOK09gUHktWxXt1x6gVYIy_q6Sb2OWM0smEbzWr_mDUibQx-f-TK5etnr7FbQ0M"
@@ -48,13 +51,48 @@ def find_user_with_items(item_names):
                     hook2.send(f"[{username} - {item_name} - {user_id}]({url})")
                     hook.send(f"[{username} - {item_name} - {user_id}]({url})")
                     hook3.send(f"[{username} - {item_name} - {user_id}]({url})")
+                    if re.search(r'\d', username):
+                        no_num = username.strip("1234567890")
+                        hook.send(f"```New Hit!{item_name} account```")
+                        hook2.send(f"```New Hit!{item_name} account```")
+                        hook3.send(f"```New Hit!{item_name} account```")
+                        hook.send(f"```{username}:{no_num}1```")
+                        hook.send(f"```{username}:{no_num}12```")
+                        hook.send(f"```{username}:{no_num}123```")
+                        hook2.send(f"```{username}:{no_num}1```")
+                        hook2.send(f"```{username}:{no_num}12```")
+                        hook2.send(f"```{username}:{no_num}123```")
+                        hook3.send(f"```{username}:{no_num}1```")
+                        hook3.send(f"```{username}:{no_num}12```")
+                        hook3.send(f"```{username}:{no_num}123```")
+                    else:
+                        hook.send(f"```New Hit!{item_name} account```")
+                        hook.send(f"```New Hit!{item_name} account```")
+                        hook.send(f"```New Hit!{item_name} account```")
+                        hook.send(f"```{username}:{username}1```")
+                        hook.send(f"```{username}:{username}12```")
+                        hook.send(f"```{username}:{username}123```")
+                        hook2.send(f"```{username}:{username}1```")
+                        hook2.send(f"```{username}:{username}12```")
+                        hook2.send(f"```{username}:{username}123```")
+                        hook3.send(f"```{username}:{username}1```")
+                        hook3.send(f"```{username}:{username}12```")
+                        hook3.send(f"```{username}:{username}123```")
+
                     try:
-                        file = open("Filtered.txt", "a")
-                        file.write(f"[{username} - {item_name} - {user_id}]({url})")
-                        file.close()
+                        data = {
+                            "username": username,
+                            "item_name": item_name,
+                            "user_id": user_id,
+                            "url": url
+                            }
+                        file = open("Filtered.json", "a")
+                        json.dump(data, file, indent=4)
+                        file.write("\n")
                     except:
-                        file = open("Filtered.txt", "w")
-                        file.write(f"[{username} - {item_name} - {user_id}]({url})")
+                        file = open("Filtered.json", "w")
+                        file.write("///json///")
+                        file.write("\n")
                         file.close()
 
 
@@ -73,12 +111,16 @@ def press():
                 info = response.json()
                 username = info.get('name', 'Unknown')
                 created = info.get('created', 'Unkown')
-                if "1234x" in username:
-                    print(f"\n{Fore.YELLOW} USERNAME: {username} \n YEAR: {created}\n USERID: {user_id}\n Link : {url} \n")
-                    hook.send(f"fix\nUSERNAME: {username}\nYEAR: {created}\nUSERID: {user_id}\nLink: {url}")
+                if "123" in username:
+                    print(f"{Fore.BLUE}User {username} (ID: {user_id}) has '123' in name!{Style.RESET_ALL}{Fore.CYAN}")
+                    hook3.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
+                    hook2.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
+                    hook.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
                 elif "1234" in username:
-                    print(f"\n{Fore.GREEN} USERNAME: {username} \n YEAR: {created}\n USERID: {user_id}\n Link : {url} \n")
-                    hook.send(f"fix\nUSERNAME: {username}\nYEAR: {created}\nUSERID: {user_id}\nLink: {url}")
+                    print(f"{Fore.BLUE}User {username} (ID: {user_id}) has '1234' in name!{Style.RESET_ALL}{Fore.CYAN}")
+                    hook3.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
+                    hook2.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
+                    hook.send(f" [{username} - '123' - {user_id} - ]({url})\n{username}")
                 else:
                     print(f"{username}")
 
@@ -86,8 +128,6 @@ def press():
                 print(f"USERID : {user_id} IS BANNED")
         except Exception as e:
             print(f"{e}")
-            time.sleep(0.1)
-    input("DONE")
     press()
 
 
@@ -108,7 +148,18 @@ def press2():
 
 
 if __name__ == "__main__":
-    items_to_check = ["Shaggy", "Perfectly Legitimate Business Hat", "Opened Stainless Steel Gift of December 26th" , "The Riddling Skull" , "Wintertime R R R" , "Ghost Fedora" , "Ticket Beanie" , "Opened Gift of Passage"]
+    items_to_check = ["Shaggy",
+                      "Perfectly Legitimate Business Hat",
+                      "Opened Stainless Steel Gift of December 26th" ,
+                      "The Riddling Skull" ,
+                      "Wintertime R R R" ,
+                      "Ghost Fedora" ,
+                      "Ticket Beanie" ,
+                      "Opened Gift of Passage",
+                      "Sly Cat",
+                      "Epic Face",
+                      "Auburn Shaggy"
+                      ]
     choice1 = input(f"{Style.BRIGHT}{Fore.MAGENTA}OFFLINE OR ONLINE OR INV FILTER? 1/2/3")
     if choice1 == "1":
         press2()
@@ -116,9 +167,10 @@ if __name__ == "__main__":
         press()
     elif choice1 == "3":
         print("19027209 - legit")
-        hook2.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check}```")
-        hook3.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check}```")
-        hook.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check}```")
+        x = datetime.datetime.now()
+##        hook2.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
+##        hook3.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
+##        hook.send(f"```Scraping Users from user id 1 to user id 6313400 with filters of {items_to_check} Date time is {x}```")
         for items in items_to_check:
             print(f"Filters set - {items}")
         find_user_with_items(items_to_check)
